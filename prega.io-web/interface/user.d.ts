@@ -15,5 +15,6 @@ export interface IUser{
     current_medicines ? : string[],
     diseases ? : string[],
     allergies ? : string[],
-    documents : IDocuments[]
+    documents : IDocuments[],
+    account_created : Timestamp;
 }

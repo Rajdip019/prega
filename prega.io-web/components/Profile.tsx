@@ -11,7 +11,7 @@ interface Props {
 
 const Profile: React.FC<Props> = ({ userData }) => {
 
-    const pregnancyStartingDate = userData.starting_date?.seconds && new Date(userData.starting_date?.seconds * 1000);
+    const pregnancyStartingDate = userData.account_created && new Date(userData.account_created?.seconds * 1000);
     const today = new Date();
     const daysGap = pregnancyStartingDate && differenceInDays(today, pregnancyStartingDate);
     const weeksGap = daysGap && daysToWeeks(daysGap);
@@ -29,7 +29,7 @@ const Profile: React.FC<Props> = ({ userData }) => {
                     <p> <span className='font-medium mb-2' >Name :</span> {userData.name}</p>
                     <p><span className='font-medium mb-2'>Age :</span> {userData.age}</p>
                     <p> <span className='font-medium mb-2'>Blood Group :</span> {userData.blood_group} </p>
-                    {userData.starting_date?.seconds && <p> <span className=' font-medium mb-2'> Pregnancy Time : </span><>{weeksGap} Weeks </></p>}
+                    {userData.account_created?.seconds && <p> <span className=' font-medium mb-2'> Pregnancy Time : </span><>{weeksGap} Weeks </></p>}
                 </div>
             </div>
             <div className='flex mt-10 items-center mb-10 lg:mb-0'>

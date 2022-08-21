@@ -16,7 +16,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/l
 
 const UserDocument: React.FC<Props> = ({ userDocument }) => {
 
-  const dateFormatted = userDocument.date && format(new Date(userDocument.date.seconds * 1000), 'do LLLLLL, yyyy');
+  const dateFormatted = userDocument.date && format(new Date(userDocument.date), 'do LLLLLL, yyyy');
 
   return (
     <>
@@ -52,7 +52,7 @@ const UserDocument: React.FC<Props> = ({ userDocument }) => {
             <div>
               {userDocument.doc_format !== 'application/pdf' && (
                 <a href={userDocument.doc_url} target="_blank" rel="noreferrer">
-                  <img src={userDocument.doc_url} alt="" className='w-full rounded-xl border-2 border-black mt-8 md:mt-0' />
+                  <img src={userDocument.doc_url} alt="" className='w-96 rounded-xl border-2 border-black mt-8 md:mt-0' />
                 </a>
               )}
             </div>
