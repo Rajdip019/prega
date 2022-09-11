@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:prega/pages/add_doc.dart';
-import 'package:prega/pages/edit_doc.dart';
 import 'package:prega/pages/feeds.dart';
-import 'package:prega/pages/main_home.dart';
+import 'package:prega/pages/profile.dart';
 import 'package:prega/pages/tips.dart';
 
 void main() => runApp(const MyApp());
@@ -28,13 +27,11 @@ class EntryPage extends StatefulWidget {
 
 class _EntryPageState extends State<EntryPage> {
   int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static final List<Widget> _widgetOptions = <Widget>[
     const Feeds(),
     const AddDoc(),
     Tips(),
-    const MainHome(),
+    const Profile(),
   ];
 
   void _onItemTapped(int index) {

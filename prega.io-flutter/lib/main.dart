@@ -6,9 +6,14 @@ import 'package:prega/pages/home.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:prega/provider/google_signin.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/services.dart';
 
 Future main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [
+    SystemUiOverlay.bottom, //This line is used for showing the bottom bar
+  ]);
+
   await Firebase.initializeApp();
   runApp(const MyApp());
 }

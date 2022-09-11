@@ -26,7 +26,7 @@ class SignIn extends StatelessWidget {
               provider.googleLogin();
             },
             style: ElevatedButton.styleFrom(
-                primary: const Color.fromARGB(255, 47, 46, 65),
+                backgroundColor: const Color.fromARGB(255, 47, 46, 65),
                 fixedSize: const Size(240, 46)),
             label: const Text(
               "Login",

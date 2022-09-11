@@ -280,7 +280,7 @@ class _FeedsState extends State<Feeds> {
                                                   context,
                                                   MaterialPageRoute(
                                                     builder: (context) =>
-                                                        EditDoc(),
+                                                        const EditDoc(),
                                                   ),
                                                 );
                                               },
@@ -294,10 +294,12 @@ class _FeedsState extends State<Feeds> {
                                                     .doc(streamSnapshot.data
                                                         ?.docs[index]['doc_id'])
                                                     .delete()
-                                                    .then((value) => Scaffold
-                                                            .of(context)
-                                                        // ignore: deprecated_member_use
-                                                        .showSnackBar(delMsg));
+                                                    .then((value) =>
+                                                        ScaffoldMessenger.of(
+                                                                context)
+                                                            // ignore: deprecated_member_use
+                                                            .showSnackBar(
+                                                                delMsg));
                                               },
                                               icon: const Icon(Icons.delete),
                                               color: const Color.fromARGB(

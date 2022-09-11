@@ -1,5 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class EditDoc extends StatefulWidget {
@@ -59,87 +57,90 @@ class _EditDocState extends State<EditDoc> {
             child: Form(
               key: _formkey,
               child: SingleChildScrollView(
-                child: Column(children: [
-                  TextFormField(
-                    controller: changeTitle,
-                    keyboardType: TextInputType.text,
-                    decoration: const InputDecoration(
-                      labelText: 'Title',
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  TextFormField(
-                    controller: changeDoctorName,
-                    keyboardType: TextInputType.text,
-                    decoration: const InputDecoration(
-                      labelText: 'Doctor Name',
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  TextFormField(
-                    controller: changeDescription,
-                    keyboardType: TextInputType.multiline,
-                    maxLines: 5,
-                    decoration: const InputDecoration(
-                      labelText: "Description",
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    children: [
-                      Checkbox(
-                        checkColor: Colors.white,
-                        value: isChecked,
-                        onChanged: (bool? value) {
-                          setState(() {
-                            isChecked = value!;
-                          });
-                        },
+                child: Column(
+                  children: [
+                    TextFormField(
+                      controller: changeTitle,
+                      keyboardType: TextInputType.text,
+                      decoration: const InputDecoration(
+                        labelText: 'Title',
+                        border: OutlineInputBorder(),
                       ),
-                      const SizedBox(
-                        width: 8,
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    TextFormField(
+                      controller: changeDoctorName,
+                      keyboardType: TextInputType.text,
+                      decoration: const InputDecoration(
+                        labelText: 'Doctor Name',
+                        border: OutlineInputBorder(),
                       ),
-                      const Text(
-                        'Visiblity',
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.w500),
-                      )
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        // createUser();
-                        final user = FirebaseAuth.instance.currentUser!;
-                        final user1 = FirebaseFirestore.instance
-                            .collection('user/${user.uid}/documents');
-                        // user1.doc(user1.)
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    TextFormField(
+                      controller: changeDescription,
+                      keyboardType: TextInputType.multiline,
+                      maxLines: 5,
+                      decoration: const InputDecoration(
+                        labelText: "Description",
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      children: [
+                        Checkbox(
+                          checkColor: Colors.white,
+                          value: isChecked,
+                          onChanged: (bool? value) {
+                            setState(() {
+                              isChecked = value!;
+                            });
+                          },
+                        ),
+                        const SizedBox(
+                          width: 8,
+                        ),
+                        const Text(
+                          'Visiblity',
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.w500),
+                        )
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          // createUser();
+                          // final user = FirebaseAuth.instance.currentUser!;
+                          // final user1 = FirebaseFirestore.instance
+                          //     .collection('user/${user.uid}/documents');
+                          // user1.doc(user1.)
 
-                        // Navigator.pop(context);
-                      },
-                      style: ElevatedButton.styleFrom(
-                          primary: const Color.fromARGB(255, 47, 46, 65),
-                          fixedSize: const Size(double.infinity, 46)),
-                      child: const Text(
-                        "Save",
-                        style: TextStyle(fontSize: 18),
+                          // Navigator.pop(context);
+                        },
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor:
+                                const Color.fromARGB(255, 47, 46, 65),
+                            fixedSize: const Size(double.infinity, 46)),
+                        child: const Text(
+                          "Save",
+                          style: TextStyle(fontSize: 18),
+                        ),
                       ),
                     ),
-                  ),
-                ]),
+                  ],
+                ),
               ),
             ),
           )

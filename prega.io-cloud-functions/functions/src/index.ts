@@ -8,7 +8,7 @@
 import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
 import {Request, Response} from "firebase-functions";
-const {CloudTasksClient} = require("@google-cloud/tasks");
+const {CloudTasksClientS} = require("@google-cloud/tasks");
 
 admin.initializeApp();
 

@@ -346,7 +346,8 @@ class _EditProfileState extends State<EditProfile> {
                             Navigator.pop(context);
                           },
                           style: ElevatedButton.styleFrom(
-                              primary: const Color.fromARGB(255, 47, 46, 65),
+                              backgroundColor:
+                                  const Color.fromARGB(255, 47, 46, 65),
                               fixedSize: const Size(double.infinity, 46)),
                           child: const Text(
                             "Save",

@@ -1,7 +1,4 @@
 import 'dart:convert';
-import 'dart:ffi';
-import 'dart:io';
-
 import 'package:clipboard/clipboard.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -40,112 +37,118 @@ class _ShareState extends State<Share> {
   Widget build(BuildContext context) {
     return Material(
       child: SingleChildScrollView(
-          child: Column(
-        children: [
-          const SizedBox(
-            height: 55,
-          ),
-          Row(
-            children: [
-              const SizedBox(
-                width: 15,
-              ),
-              Image.asset(
-                'assets/icons/icon.png',
-                height: 45,
-                width: 45,
-              ),
-              const SizedBox(
-                width: 15,
-              ),
-              const Text(
-                "Share",
-                style: TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.w500,
-                  color: Color.fromARGB(255, 47, 46, 65),
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 55,
+            ),
+            Row(
+              children: [
+                const SizedBox(
+                  width: 15,
+                ),
+                Image.asset(
+                  'assets/icons/icon.png',
+                  height: 45,
+                  width: 45,
+                ),
+                const SizedBox(
+                  width: 15,
+                ),
+                const Text(
+                  "Share",
+                  style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.w500,
+                    color: Color.fromARGB(255, 47, 46, 65),
+                  ),
+                ),
+                const SizedBox(
+                  width: 160,
+                )
+              ],
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            const Text(
+              'Set Expiry Time',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: InputDecorator(
+                decoration: const InputDecoration(border: OutlineInputBorder()),
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton(
+                      hint: Text(time),
+                      items: timeList.map((String items) {
+                        return DropdownMenuItem(
+                          value: items,
+                          child: Text(items),
+                        );
+                      }).toList(),
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          time = newValue!;
+                          if (newValue == '1 hour') {
+                            actualTime = 3600;
+                          } else {
+                            actualTime = 7200;
+                          }
+                        });
+                      }),
                 ),
               ),
-              const SizedBox(
-                width: 160,
-              )
-            ],
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          const Text(
-            'Set Expiry Time',
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: InputDecorator(
-              decoration: const InputDecoration(border: OutlineInputBorder()),
-              child: DropdownButtonHideUnderline(
-                child: DropdownButton(
-                    hint: Text(time),
-                    items: timeList.map((String items) {
-                      return DropdownMenuItem(
-                        value: items,
-                        child: Text(items),
-                      );
-                    }).toList(),
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        time = newValue!;
-                        if (newValue == '1 hour') {
-                          actualTime = 3600;
-                        } else {
-                          actualTime = 7200;
-                        }
-                      });
-                    }),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                http.Response response = await getLink();
+
+                Map<String, dynamic> data = jsonDecode(response.body);
+                setState(() {
+                  link = data['expirable_link'];
+                });
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color.fromARGB(255, 47, 46, 65),
+              ),
+              child: const Text("Get Link"),
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            Center(
+              child: InkWell(
+                child: Text(link),
+                onTap: () {
+                  // ignore: avoid_print
+                  FlutterClipboard.copy(link).then(
+                    // ignore: avoid_print
+                    (value) =>
+                        ScaffoldMessenger.of(context).showSnackBar(success),
+                  );
+                },
               ),
             ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          ElevatedButton(
-            onPressed: () async {
-              http.Response response = await getLink();
-
-              Map<String, dynamic> data = jsonDecode(response.body);
-              setState(() {
-                link = data['expirable_link'];
-              });
-            },
-            style: ElevatedButton.styleFrom(
-              primary: const Color.fromARGB(255, 47, 46, 65),
+            const SizedBox(
+              height: 30,
             ),
-            child: const Text("Get Link"),
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          Center(
-            child: InkWell(
-              child: Text(link),
-              onTap: () {
-                FlutterClipboard.copy(link).then((value) => print('done'));
-              },
-            ),
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          link == ""
-              ? const Text('')
-              : QrImage(
-                  data: link,
-                  size: 300,
-                )
-        ],
-      )),
+            link == ""
+                ? const Text('')
+                : QrImage(
+                    data: link,
+                    size: 300,
+                  )
+          ],
+        ),
+      ),
     );
   }
 }

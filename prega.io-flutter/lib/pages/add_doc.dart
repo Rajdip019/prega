@@ -228,7 +228,7 @@ class _AddDocState extends State<AddDoc> {
                               icon: const FaIcon(FontAwesomeIcons.file),
                               label: const Text('Open File'),
                               style: ElevatedButton.styleFrom(
-                                  primary:
+                                  backgroundColor:
                                       const Color.fromARGB(255, 47, 46, 65),
                                   fixedSize: const Size(double.infinity, 46)),
                             ),
@@ -322,12 +322,13 @@ class _AddDocState extends State<AddDoc> {
                             onPressed: () {
                               uploadFile();
                               // ignore: deprecated_member_use
-                              Scaffold.of(context).showSnackBar(snbar);
+                              ScaffoldMessenger.of(context).showSnackBar(snbar);
                             },
                             icon: const FaIcon(FontAwesomeIcons.bagShopping),
                             label: const Text('Save'),
                             style: ElevatedButton.styleFrom(
-                                primary: const Color.fromARGB(255, 47, 46, 65),
+                                backgroundColor:
+                                    const Color.fromARGB(255, 47, 46, 65),
                                 fixedSize: const Size(double.infinity, 46)),
                           ),
                         ),
